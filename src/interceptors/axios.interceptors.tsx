@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios"
 import { getValidationError } from "../utilities/get-validation-error"
+import { SnackbarUtilities } from "../utilities/snackbar-manager"
 //import type { AxiosRequestConfig } from "axios"
 
 export const PrivatePublicAxiosInterceptor = () => {
@@ -30,6 +31,7 @@ axios.interceptors.response.use(
     return res
   },
   (error) => {
-    console.log("Error", getValidationError(error.code));
+    //console.log("Error", getValidationError(error.code));
+    SnackbarUtilities.error(getValidationError(error.code)); // * err.code viene del backend
     return Promise.reject(error)
   })

@@ -6,8 +6,9 @@ import { PrivatePublicAxiosInterceptor } from './interceptors/axios.interceptors
 
 PrivatePublicAxiosInterceptor()
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+/*
+ <React.StrictMode>
     <App />
   </React.StrictMode>,
-)
+*/
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
