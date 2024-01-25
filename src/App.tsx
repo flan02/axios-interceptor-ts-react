@@ -1,44 +1,32 @@
-
-//import { useEffect, useState } from 'react'
-import './App.css'
-// import { testingService } from './services/testing.service'
-import { SnackbarUtilitiesConfigurator } from './utilities/snackbar-manager'
-import { SnackbarProvider } from 'notistack'
-import ComponentTest from './components/ComponentTest'
-//import { ErrorBoundary } from './utilities/ErrorBoundaries'
-import ComponentTestAsync from './components/ComponentTestAsync'
+import "./App.css";
+import { UsingState } from "./errorHanlding/usingState";
+import {
+  StandardErrorBoundary,
+  UsingErrorBoundaries,
+} from "./errorHanlding/usingErrorBoundaries";
+import { UsingTheRightWay } from "./errorHanlding/usingTheRightWay";
+import { ErrorBoundary } from "react-error-boundary";
+import { ProductsFetchingError } from "./components/errors/ErrorBoundrayComponent";
 
 function App() {
-  /*
-    const [name, setName] = useState<string | null>(null)
-  
-  
-    useEffect(() => {
-      setTimeout(() => {
-        setName("Andres")
-      }, 2000)
-    }, [])
-  */
-
-  // TODO lo comentado pertenece al 1er ejemplo, gestionando un timeout
-  // TODO lo ultimo es manejar los fetch por separado envolviendo a cada uno un ErrorBoundary
   return (
-    <>
-      <SnackbarProvider>
-        <SnackbarUtilitiesConfigurator />
-        {/*  <ErrorBoundary
-          resetCondition={name}
-          fallbackComponent={<>There was a problem with this component!</>}
-        >
+    <div className="App">
+      {/* <UsingState /> */}
+      {/* <StandardErrorBoundary>
+        <UsingErrorBoundaries />
+      </StandardErrorBoundary> 
       */}
-        <h1>Error Boundaries</h1>
-        <ComponentTestAsync />
-        {/*<ComponentTest name={name} /> */}
-        <ComponentTest name={'App not crashed regardless Error boundaries is true'} />
-        {/*   </ErrorBoundary> */}
-      </SnackbarProvider>
-    </>
-  )
+
+      {/* MODERN REACT ERRORBUNDARIES HANDLER */}
+      <h1 className="to-cyan-700">Modern React ErrorBoundaries Handler</h1>
+      <ErrorBoundary
+        FallbackComponent={ProductsFetchingError}
+        onError={() => console.log("Error happened!")}
+      >
+        <UsingTheRightWay />
+      </ErrorBoundary>
+    </div>
+  );
 }
 
-export default App
+export default App;
